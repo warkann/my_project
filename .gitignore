@@ -1,0 +1,50 @@
+# /
+Gemfile.local
+Gemfile.local.lock
+
+/tmp
+/.ruby-gemset
+/.ruby-version
+/.idea
+/.bundle
+/.capx.yaml
+pssaml.jar
+
+# assets
+/app/assets/stylesheets/.sass-cache
+
+# /belgadt/
+/belgadt/*
+
+# /config/
+/config/database.yml
+/config/database.yml.*
+/config/app_config.yml
+/config/network.yml
+/config/scm_credentials_for_deploy.yml
+/config/gemnasium.yml
+/config/redis_session.yml
+
+# /db/
+/db/schema.rb
+/db/structure.sql
+
+# /log/
+/log/*
+
+# /public/
+/public/assets
+/public/sprites
+
+/public/favicon.png
+/public/shared
+
+# /vendor/
+/vendor/*
+
+# vim
+*.swp
+*.swo
+tags
+rspec_locations.txt
+html
