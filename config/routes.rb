@@ -55,4 +55,6 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   root to: 'girls#index'
+
+  get 'login' => 'login#index'
 end
