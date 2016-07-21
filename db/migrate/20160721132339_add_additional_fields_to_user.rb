@@ -13,5 +13,7 @@ class AddAdditionalFieldsToUser < ActiveRecord::Migration
     remove_column :users, :nickname if column_exists?(:users, :nickname)
     remove_column :users, :provider if column_exists?(:users, :provider)
     remove_column :users, :url if column_exists?(:users, :url)
+
+    User.reset_column_information
   end
 end
