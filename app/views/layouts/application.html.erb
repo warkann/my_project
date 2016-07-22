@@ -10,7 +10,7 @@
     <% if current_user %>
         <p>Привет, <%= current_user.email %></p>
         <p><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %></p>
-        <p><%= link_to 'Личный кабинет', edit_girl_path(current_user.id) %></p>
+        <p><%= link_to 'Личный кабинет', girl_path(current_user.id) %></p>
     <% else %>
         <%= link_to 'Войти на сайт', new_user_session_path %>
     <% end %>

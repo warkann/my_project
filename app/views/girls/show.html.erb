@@ -4,3 +4,7 @@
 <% fields.each_pair do |key, value| %>
     <p><%= "#{key}: #{@girl.public_send(value)}" %></p>
 <% end %>
+
+<% if @girl.id == current_user.id %>
+  <%= link_to 'Редактировать анкету', edit_girl_path %>
+<% end %>
