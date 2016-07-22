@@ -1,6 +1,6 @@
 <%= form_for @girl, url: girl_path(@girl.id) do |f| %>
 
-    <% fields = { 'Город': :city, 'Рост': :height, 'Размер груди': :boobs_size, 'Телосложение': :body_type,
+    <% fields = { 'Никнейм': :nickname, 'Город': :city, 'Рост': :height, 'Размер груди': :boobs_size, 'Телосложение': :body_type,
                   'Возраст': :age, 'Телефон': :phone, 'Территориально': :area, 'Интересы': :interests } %>
 
     <% fields.each_pair do |key, value| %>
@@ -11,6 +11,8 @@
           </p>
         </div>
     <% end %>
+
+    <p>Я <%= f.select :sex, [['Женщина', 'F'], ['Мужчина', 'M']]%></p>
 
     <% if @girl.id == current_user.id %>
         <%= f.submit 'Сохранить' %>

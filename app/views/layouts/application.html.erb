@@ -8,7 +8,7 @@
 
   <div style="float: right; background-color: white; width: 100%">
     <% if current_user %>
-        <p>Привет, <%= current_user.email %></p>
+        <p>Привет, <%= current_user.nickname ? current_user.nickname : 'Неназвавший себя' %></p>
         <p><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %></p>
         <p><%= link_to 'Личный кабинет', girl_path(current_user.id) %></p>
     <% else %>
