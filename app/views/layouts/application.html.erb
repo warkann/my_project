@@ -5,6 +5,17 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <div style="float: right; background-color: white; width: 100%">
+    <% if current_user %>
+        <p>Привет, <%= current_user.email %></p>
+        <p><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %></p>
+        <p><%= link_to 'Личный кабинет', edit_girl_path(current_user.id) %></p>
+    <% else %>
+        <%= link_to 'Войти на сайт', new_user_session_path %>
+    <% end %>
+    <hr>
+  </div>
 </head>
 <body style="background-image: url(background3.jpeg)">
 

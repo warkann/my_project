@@ -55,6 +55,8 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   root to: 'girls#index'
+  #get 'girls/:id' => 'girls#show', as: :girl
+  resources :girls
 
   get 'login' => 'login#index'
 end

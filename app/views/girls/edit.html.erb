@@ -1,0 +1,20 @@
+<%= form_for @girl, url: girl_path(@girl.id) do |f| %>
+
+    <% fields = { 'Город': :city, 'Рост': :height, 'Размер груди': :boobs_size, 'Телосложение': :body_type,
+                  'Возраст': :age, 'Телефон': :phone, 'Территориально': :area, 'Интересы': :interests } %>
+
+    <% fields.each_pair do |key, value| %>
+        <div>
+          <p>
+            <%= f.label key %>
+            <%= f.text_field value %>
+          </p>
+        </div>
+    <% end %>
+
+    <% if @girl.id == current_user.id %>
+        <%= f.submit 'Сохранить' %>
+        <%= link_to 'На главную', root_path %>
+    <% end %>
+
+<% end %>

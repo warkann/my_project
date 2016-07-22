@@ -1,0 +1,6 @@
+<% fields = { 'Город': :city, 'Рост': :height, 'Размер груди': :boobs_size, 'Телосложение': :body_type,
+              'Возраст': :age, 'Телефон': :phone, 'Территориально': :area, 'Интересы': :interests } %>
+
+<% fields.each_pair do |key, value| %>
+    <p><%= "#{key}: #{@girl.public_send(value)}" %></p>
+<% end %>
