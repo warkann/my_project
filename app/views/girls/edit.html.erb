@@ -1,22 +1,59 @@
-<%= form_for @girl, url: girl_path(@girl.id) do |f| %>
+<div class="personal-info" style="margin-left: 40%" >
+  <%= form_for @girl, url: girl_path(@girl.id) do |f| %>
 
     <% fields = { 'Никнейм': :nickname, 'Город': :city, 'Рост': :height, 'Размер груди': :boobs_size, 'Телосложение': :body_type,
                   'Возраст': :age, 'Телефон': :phone, 'Территориально': :area, 'Интересы': :interests } %>
 
-    <% fields.each_pair do |key, value| %>
-        <div>
-          <p>
-            <%= f.label key %>
-            <%= f.text_field value %>
-          </p>
-        </div>
-    <% end %>
+    <table>
+      <% fields.each_pair do |key, value| %>
+        <tr>
+          <th><%= f.label key %></th>
+          <td><%= f.text_field value %></td>
+        </tr>
+      <% end %>
+    </table>
 
     <p>Я <%= f.select :sex, [['Женщина', 'F'], ['Мужчина', 'M']]%></p>
+    <p><%= f.file_field :photos %></p>
+
+      <%#TODO add multiload %>
+      <%#= button_tag 'Добавить фото', type: 'button', id: 'morePhoto' %>
+
+    <div style="display: flex">
+      <% Photo.user_photos(@girl.id).to_a.each do |photo| %>
+        <div style="width: 200px; display: block">
+          <%= image_tag(photo.image.thumb_200x200) %>
+          <%= button_tag 'Удалить', type: 'button', class: 'removeBtn', id: photo.id %>
+        </div>
+      <% end %>
+    </div><br>
 
     <% if @girl.id == current_user.id %>
-        <%= f.submit 'Сохранить' %>
-        <%= link_to 'На главную', root_path %>
+      <%= f.submit 'Сохранить' %>
+      <%= link_to 'На главную', root_path %>
     <% end %>
 
-<% end %>
+  <% end %>
+</div>
+
+<script>
+  $('.removeBtn').on('click', function() {
+    var btn = $(this);
+    $.ajax({
+      type: 'POST',
+      url: '/girls/delete_photo',
+      data: {photo_id: btn.attr('id'), user_id: <%= @girl.id %>},
+      success: function() {
+        btn.closest('div').remove();
+      },
+      error: function(data) {
+        alert('Что-то пошло не так :(')
+      }
+    });
+  });
+
+//  $('#morePhoto').on('click', function() {
+//    var originalEl = $('#photos').closest('p').clone();
+//    originalEl.insertAfter($('#photos').closest('p'));
+//  })
+</script>

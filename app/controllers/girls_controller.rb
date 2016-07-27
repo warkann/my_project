@@ -14,6 +14,8 @@ class GirlsController < ApplicationController
 
   def update
     if @girl.update(girl_params)
+      save_image if params[:user][:photos].present?
+
       flash[:success] = 'Сохранено успешно'
       redirect_to girl_path(@girl.id)
     else
@@ -22,10 +24,16 @@ class GirlsController < ApplicationController
     end
   end
 
+  def ajax_remove_image
+    Photo.where('user_id = ? and id = ?', params[:user_id], params[:photo_id]).first.destroy
+    render json: { status: 200 }
+    #TODO handle errors here
+  end
+
   private
 
   def girl_params
-    params.require(:user).permit(:city, :height, :boobs_size, :body_type, :age, :phone, :area, :interests, :nickname, :sex)
+    params.require(:user).permit(:city, :height, :boobs_size, :body_type, :age, :phone, :area, :interests, :nickname, :sex, {photos: []})
   end
 
   def find_girl
@@ -37,5 +45,12 @@ class GirlsController < ApplicationController
       flash[:error] = 'Неверный адрес'
       redirect_to root_path
     end
+  end
+
+  def save_image
+    new_photo = Photo.new
+    new_photo.image = params[:user][:photos]
+    new_photo.user_id = @girl.id
+    new_photo.save
   end
 end

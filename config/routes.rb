@@ -55,8 +55,8 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   root to: 'girls#index'
-  #get 'girls/:id' => 'girls#show', as: :girl
   resources :girls
 
   get 'login' => 'login#index'
+  post 'girls/delete_photo' => 'girls#ajax_remove_image'
 end

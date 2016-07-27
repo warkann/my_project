@@ -35,6 +35,7 @@ pssaml.jar
 # /public/
 /public/assets
 /public/sprites
+/public/uploads/**
 
 /public/favicon.png
 /public/shared

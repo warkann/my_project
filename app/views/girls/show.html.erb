@@ -1,10 +1,21 @@
-<% fields = { 'Город': :city, 'Рост': :height, 'Размер груди': :boobs_size, 'Телосложение': :body_type,
-              'Возраст': :age, 'Телефон': :phone, 'Территориально': :area, 'Интересы': :interests } %>
+<div class="personal-info" style="margin-left: 40%" >
+  <% fields = { 'Город': :city, 'Рост': :height, 'Размер груди': :boobs_size, 'Телосложение': :body_type,
+                'Возраст': :age, 'Телефон': :phone, 'Территориально': :area, 'Интересы': :interests } %>
 
-<% fields.each_pair do |key, value| %>
-    <p><%= "#{key}: #{@girl.public_send(value)}" %></p>
-<% end %>
+  <table>
+    <% fields.each_pair do |key, value| %>
+      <tr>
+        <th><%= key %></th>
+        <td><%= @girl.public_send(value) %></td>
+      </tr>
+    <% end %>
+  </table>
 
-<% if @girl.id == current_user.id %>
-  <%= link_to 'Редактировать анкету', edit_girl_path %>
-<% end %>
+  <% if @girl.id == current_user.id %>
+    <%= link_to 'Редактировать анкету', edit_girl_path %>
+  <% end %><br>
+
+  <% Photo.user_photos(@girl.id).to_a.each do |photo| %>
+    <%= image_tag(photo.image.thumb_200x200) %>
+  <% end %>
+</div>
